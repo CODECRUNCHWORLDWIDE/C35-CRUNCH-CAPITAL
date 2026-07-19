@@ -1,0 +1,105 @@
+# Challenge 1 — Amortization Schedule Engine
+
+**Time:** ~90 minutes. **Difficulty:** Medium-high. **No single right implementation.**
+
+## The scenario
+
+Crunch Machine Co. is financing the **Regional Warehouse Expansion** ($650,000 capex) partly with a bank loan instead of cash on hand: **$500,000, 8% annual interest, 5-year term, monthly payments.** Before the CFO signs anything, she wants to see the **full amortization schedule** — every single monthly payment, split into how much is interest and how much is principal, and the remaining balance after each one. She also wants it in the database, not a workbook, so Finance can query "how much interest do we pay in year 3?" without opening a file.
+
+This is the time value of money from Lecture 2, run in reverse: instead of discounting a *known* stream of future cash flows to find its present value, you're given a present value (the loan amount) and asked to find the *stream* — a level monthly payment — whose present value at the loan's rate exactly equals it.
+
+## What "amortization" means, mechanically
+
+A fixed-rate, fully-amortizing loan has one constant payment every period. Each payment is split between **interest** (on the remaining balance) and **principal** (paydown of the balance). Early payments are mostly interest — the balance is still large. Late payments are mostly principal — the balance has shrunk. The **level payment** amount is found with the annuity formula:
+
+```
+Payment = P × [ r(1 + r)^n ] / [ (1 + r)^n − 1 ]
+```
+
+Where `P` = original principal, `r` = the **periodic** rate (annual rate ÷ payments per year), and `n` = the total number of payments. For this loan: `P = 500000`, annual rate `8%` → monthly `r = 0.08 / 12`, and `n = 5 × 12 = 60` payments.
+
+Each month, once you know the payment:
+
+```
+interest_this_period  = remaining_balance × r
+principal_this_period = payment − interest_this_period
+remaining_balance     = remaining_balance − principal_this_period
+```
+
+Repeat for all `n` periods. By construction, the **final** period's remaining balance should land at (or extremely close to, accounting for floating-point rounding) exactly `0`.
+
+## Your task
+
+Build a working amortization engine with three parts.
+
+### Part 1 — The payment formula, in Python
+
+Write a function `monthly_payment(principal, annual_rate, years)` implementing the formula above. Confirm it against a known reference value (search for an online amortization calculator with the same inputs — $500,000, 8%, 5 years, monthly — and check your `monthly_payment` output matches within a cent).
+
+### Part 2 — Generate the full schedule
+
+Write a function `amortization_schedule(principal, annual_rate, years)` that returns a list of rows (or a pandas DataFrame — your choice), one per payment, with columns: `period` (1 to 60), `payment`, `interest_paid`, `principal_paid`, `remaining_balance`. Loop through all 60 periods applying the mechanics above.
+
+**Verify it, don't just trust it:**
+
+- The **last** row's `remaining_balance` should be `0` (or within a fraction of a cent).
+- The sum of every row's `principal_paid` should equal the original `$500,000` principal.
+- The sum of every row's `payment` should equal `60 × monthly_payment(...)`.
+
+If any of those three checks fail, you have a bug — find it before moving on.
+
+### Part 3 — Store it in SQL and answer real questions with queries
+
+Create a table for the schedule and load your generated rows into it (via `pandas.DataFrame.to_sql(...)`, or hand-written `INSERT`s if you prefer):
+
+```sql
+CREATE TABLE warehouse_loan_schedule (
+    period            INTEGER PRIMARY KEY,
+    payment           NUMERIC NOT NULL,
+    interest_paid     NUMERIC NOT NULL,
+    principal_paid    NUMERIC NOT NULL,
+    remaining_balance NUMERIC NOT NULL
+);
+```
+
+Then answer these with **SQL queries**, not Python:
+
+1. How much total interest does the company pay over the full 5 years?
+2. How much interest is paid in **year 1** (periods 1–12) alone, vs. **year 5** (periods 49–60)? What does the comparison tell you about how amortization front-loads interest?
+3. After exactly **2 years** (period 24), what is the remaining balance? What fraction of the original $500,000 has actually been paid down (careful — this is *not* the same as "2/5 of the years have passed," because of the interest front-loading from question 2)?
+4. If the company could refinance after year 2 at a lower rate, how much of the *original* $500,000 would still be owed — i.e., what number would a refinance actually need to cover?
+
+## Constraints
+
+- The engine (Parts 1–2) must work for **any** `principal`, `annual_rate`, and `years` — not just this loan's numbers. Prove it by also running it for a smaller, sanity-checkable example: $10,000 at 6% for 1 year, monthly payments, and manually verify the first period's interest by hand (`10000 × 0.06/12 = 50.00`).
+- No spreadsheet, per this week's data tooling rule — the schedule lives in a table, generated by code.
+- Show your three verification checks from Part 2 explicitly (print them) — a schedule that "looks right" but doesn't balance to zero is a bug you haven't found yet, not a working engine.
+
+## Hints
+
+<details>
+<summary>On the payment formula not matching a reference calculator</summary>
+
+The single most common bug: using the **annual** rate instead of the **periodic** (monthly) rate somewhere in the formula, or using `n = 5` instead of `n = 60`. Every `r` and every exponent in the formula must be in the *same* unit as the payment frequency — if payments are monthly, `r` is monthly and `n` counts months.
+
+</details>
+
+<details>
+<summary>On the final balance not hitting exactly zero</summary>
+
+Floating-point arithmetic accumulates tiny rounding errors over 60 iterations — a final balance of `0.0000000003` or `-0.01` is normal and not a bug. A final balance off by hundreds or thousands of dollars **is** a bug — almost always the payment formula or the interest/principal split logic.
+
+</details>
+
+## How success is judged
+
+| Signal | Weak answer | Strong answer |
+|--------|-------------|----------------|
+| Correctness | Schedule doesn't balance to zero, or reference-check fails | All three Part 2 verification checks pass and are shown |
+| Generality | Hardcoded to this one loan's numbers | Works for the $10,000/6%/1yr sanity case unchanged |
+| SQL fluency | Answers computed back in Python instead of SQL | All four Part 3 questions answered with a real `SELECT` |
+| Interpretation | Just reports numbers | Explains *why* interest front-loads (tie it back to Lecture 2's discounting logic — the balance, and thus the interest charged on it, is largest early) |
+
+## Submission
+
+Commit your engine (`amortization.py`), the loaded schedule (`schedule.sql` or a script that generates it), and your four SQL answers with brief written interpretation, to your portfolio under `c35-week-01/challenge-01/`.
