@@ -17,6 +17,14 @@ A signal is a table, not a feeling. For every ticker, on every date you might tr
 
 That table — and only that table — is what Lecture 2's backtest engine is allowed to see. It does not know *why* TFI is long. It does not know your thesis. It just executes. This separation is deliberate and important: it forces every piece of judgment into the signal-construction step, where you can inspect, debate, and audit it, instead of letting judgment leak invisibly into the backtest itself.
 
+```mermaid
+flowchart LR
+  A["Thesis in plain English"] --> B["Signal construction - all judgment happens here"]
+  B --> C["Signal table ticker date score position"]
+  C --> D["Backtest engine - mechanical execution only"]
+```
+*Judgment is forced into the signal-construction step; the backtest engine only ever sees the finished table.*
+
 **A note on shorting.** A real long/short strategy holds long positions in names it expects to outperform and short positions in names it expects to underperform, which lets it profit even in a falling market. This week's backtest is **long-only with a cash residual** — we hold the strategy's chosen names and leave the rest of the portfolio in cash — because it's simpler to reason about and matches how most individual investors and long-only funds actually operate. Every technique here (ranking, scoring, position sizing) extends directly to long/short; we call it out explicitly rather than pretending the simplification doesn't exist.
 
 ## 2. Momentum — "recent relative strength persists"
@@ -162,6 +170,16 @@ ORDER BY composite_rank ASC;
 ```
 
 A ticker that's *both* cheap and has strong momentum gets a low (good) composite rank and rises to the top of the buy list; a ticker that's expensive with weak momentum sinks to the bottom. This is exactly the mechanic behind real multi-factor equity strategies, just with two factors instead of five or six.
+
+```mermaid
+flowchart TD
+  A["Momentum score"] --> B["Momentum rank"]
+  C["Value score EV to EBITDA"] --> D["Value rank"]
+  B --> E["Composite rank - average of the two ranks"]
+  D --> E
+  E --> F["Buy list sorted by composite rank"]
+```
+*A ticker that ranks well on both momentum and value rises to the top of the composite buy list.*
 
 ## 7. Check yourself
 

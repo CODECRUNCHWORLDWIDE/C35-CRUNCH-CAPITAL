@@ -17,6 +17,17 @@ Solstice Data, Inc. incorporates with two founders. In the real world this start
 | **Outstanding shares** | Issued shares still held by someone (issued minus any repurchased/cancelled). |
 | **Fully diluted shares** | Outstanding shares **plus** every security that could convert into shares — unexercised options, the unallocated option pool, and unconverted SAFEs/warrants, all counted *as if* they were already common stock. |
 
+```mermaid
+flowchart TD
+  A["Authorized shares"] --> B["Issued shares"]
+  B --> C["Outstanding shares"]
+  C --> D["Fully diluted shares"]
+  E["Unexercised options"] --> D
+  F["Unallocated option pool"] --> D
+  G["Unconverted SAFEs and warrants"] --> D
+```
+*Each share category nests inside the one before it, with not-yet-issued instruments folding in only at the fully diluted layer.*
+
 Solstice authorizes **10,000,000** shares and issues every one of them on day one:
 
 ```sql
@@ -64,6 +75,15 @@ The window function `SUM(shares) OVER ()` sums the *entire result set* without c
 ## 2. Vesting — why "5,500,000 shares" isn't the same as "5,500,000 shares today"
 
 Founder and employee stock is almost always **vested**, not handed over free and clear at grant. The standard schedule — so standard it barely gets negotiated — is **four years, with a one-year cliff**: nothing vests for the first 12 months, then 25% vests all at once at the 1-year mark, then the remaining 75% vests monthly (1/48th of the total) over the next 36 months. Vesting exists to solve a real problem: if a co-founder leaves after two months, unvested stock protects the company (and the *other* founder) from having handed away a quarter of the company for two months of work.
+
+```mermaid
+flowchart LR
+  A["Vest start"] --> B["Months 0-11 nothing vests"]
+  B --> C["Month 12 cliff 25 percent vests"]
+  C --> D["Months 13-48 vest monthly"]
+  D --> E["Month 48 fully vested"]
+```
+*The standard four year schedule with a one year cliff: nothing, then a jump, then a steady monthly drip.*
 
 Add the vesting terms as columns and compute vested shares as of any date:
 

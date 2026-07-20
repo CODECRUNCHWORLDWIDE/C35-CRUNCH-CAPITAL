@@ -18,6 +18,14 @@ Solstice's post-Series-A cap table carries two preference classes, ranked by **s
 
 The **preference amount** for Series Seed is $664,000 — the sum of what those three investors actually wrote checks for ($500,000 + $100,000 + $64,000), *not* their share count times any per-share price. A liquidation preference is a claim on cash equal to the money put in (times the multiple — 1x here), independent of how many shares that money bought.
 
+```mermaid
+flowchart TD
+  Proceeds["Exit proceeds"] --> A["Series A Preferred paid first"]
+  A --> B["Series Seed Preferred paid second"]
+  B --> C["Common paid last from what remains"]
+```
+*Proceeds pay out strictly in seniority order before any residual splits by share count.*
+
 ```sql
 CREATE TABLE liquidation_terms (
     security_type    TEXT PRIMARY KEY,
@@ -35,6 +43,14 @@ INSERT INTO liquidation_terms VALUES
 ## 2. The convert-or-take-the-preference decision
 
 Every non-participating preferred holder faces one test at exit: **would I get more money taking my fixed preference, or converting to common and taking my pro-rata share of the whole deal?** A quick heuristic answers it: compare the preference to that class's fully diluted percentage times the *total* exit proceeds.
+
+```mermaid
+flowchart TD
+  A["Preferred class at exit"] --> B{"Exit price above this class's crossover"}
+  B -->|"Yes"| C["Convert to common"]
+  B -->|"No"| D["Take the fixed preference"]
+```
+*Each preferred class runs this same test independently against its own crossover price.*
 
 ```sql
 -- Class-level fully diluted % and the "convert" break-even exit price for each

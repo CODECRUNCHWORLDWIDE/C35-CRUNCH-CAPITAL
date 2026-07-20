@@ -9,6 +9,14 @@ Every DCF is the same four-step machine, no matter how complicated the business:
 3. Discount every explicit-period cash flow and the terminal value back to today, at the company's cost of capital.
 4. Sum it all up. That sum is the **enterprise value (EV)**.
 
+```mermaid
+flowchart TD
+    A["Project explicit period cash flows"] --> B["Estimate terminal value"]
+    B --> C["Discount everything to today at WACC"]
+    C --> D["Sum to enterprise value"]
+```
+*The four-step DCF machine, from forecast to enterprise value.*
+
 This lecture builds all four steps for **Crunch Machine Co.**, using the `valuation_assumptions` and `revenue_forecast` tables from this week's [README](../README.md). Read Section 1 slowly — it's the one idea (unlevered free cash flow) that the entire rest of the week is built on top of.
 
 ## 1. Unlevered free cash flow — what, and why "unlevered"
@@ -30,6 +38,17 @@ EBIT                              (Earnings Before Interest and Taxes — operat
 ```
 
 Read it as: **the cash left over after the business pays its (unlevered) taxes, reinvests in the assets it needs to keep running, and funds the extra working capital growth requires** — the cash that's genuinely free to be paid out to *all* capital providers, debt and equity together, which is exactly why it gets discounted at the blended cost of all capital.
+
+```mermaid
+flowchart LR
+    A["EBIT"] --> B["Less taxes on EBIT"]
+    B --> C["NOPAT"]
+    C --> D["Plus D and A"]
+    D --> E["Less Capex"]
+    E --> F["Less increase in NWC"]
+    F --> G["Unlevered Free Cash Flow"]
+```
+*Building unlevered free cash flow from EBIT down to UFCF.*
 
 ## 2. This week's forecast drivers
 

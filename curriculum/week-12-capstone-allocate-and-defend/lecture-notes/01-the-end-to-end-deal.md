@@ -131,6 +131,18 @@ print(round(proposed_weight, 4))      # ≈ 0.0796 -> round to an 8% satellite p
 
 This is deliberately simple — real shops use more sophisticated sizing (fractional Kelly, risk-parity contribution, VaR budgeting — Lecture 2 gets you there) — but the discipline is the same at every level of sophistication: **size is a function of edge AND risk, computed, not a round number picked because it "felt right."** `capstone_portfolio_context` already has an **8%** target weight for CRNM as the satellite — notice it lands almost exactly where this back-of-envelope sizing calculation does. That is not a coincidence; it's how the week's dataset was built, and it's exactly the kind of consistency check you should run on any position size you're handed: does it survive being recomputed independently?
 
+```mermaid
+flowchart TD
+  A["Explicit FCF discounted to PV"] --> B["Enterprise value two methods"]
+  B --> C["Equity value per share DCF"]
+  D["Comps multiple"] --> E["Equity value per share comps"]
+  C --> F["Blended target price"]
+  E --> F
+  F --> G["Upside vs market price"]
+  G --> H["Position size in the book"]
+```
+*The end-to-end deal: cash flows and comps converge on one blended target, which becomes a sized position.*
+
 ## 7. What this position does to the existing book
 
 With CRNM sized at 8%, the six core weights scale down proportionally to keep the book at 100%. Quick sanity math using `capstone_portfolio_context`:

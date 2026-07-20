@@ -84,6 +84,15 @@ Run NPV across all six projects in the `cash_flows` table (Exercise 1) and a har
 
 **Step 2 — only among the survivors, if the budget is tight enough to force a choice, rank by PI.** Here that means comparing CNC Machine (PI 1.398, needs $180,000) against Brand Relaunch (PI 1.107, needs $220,000). If Crunch Machine Co.'s capital budget this cycle is $250,000, you cannot fund both ($400,000 combined) — CNC wins the choice on every metric (higher NPV, higher PI, higher IRR), so it gets funded and Brand Relaunch waits for next cycle despite being a genuinely good, positive-NPV project. If the budget is $450,000 or more, fund both — they're independent, and both clear zero.
 
+```mermaid
+flowchart TD
+    A["All candidate projects"] --> B["Screen: reject every project with negative NPV"]
+    B --> C["Surviving positive NPV projects"]
+    C --> D["Rank survivors by PI in descending order"]
+    D --> E["Fund top down until the budget is exhausted"]
+```
+*The two-step screen-then-rank workflow for a capital-constrained project slate.*
+
 ### Why PI, not NPV, decides the ranking when the budget is genuinely tight and lumpy
 
 The CNC-vs-Brand-Relaunch choice above didn't need PI to break a tie — NPV and PI agreed. But they don't always. Here's the textbook case where a naive "rank by NPV, fund top-down" approach leaves value on the table, using three small illustrative projects (not this week's seed data — just numbers to prove the point):

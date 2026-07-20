@@ -10,6 +10,15 @@ But here is the idea this whole lecture is built around, and the one the week's 
 
 There are four families of ratios. Each answers a different question about the same set of statements.
 
+```mermaid
+flowchart TD
+  R["Financial ratios"] --> L["Liquidity - can we pay soon"]
+  R --> V["Leverage - how much is borrowed"]
+  R --> P["Profitability - how much profit is kept"]
+  R --> E["Efficiency - how fast do we turn over"]
+```
+*The four ratio families and the question each one answers.*
+
 ## 2. Liquidity ratios — can we pay what's due soon?
 
 Liquidity ratios compare **current assets** (cash and things that turn into cash within a year) to **current liabilities** (what's due within a year). They answer: *if every bill due this year came due tomorrow, could we cover it?*
@@ -164,6 +173,14 @@ ORDER BY fiscal_year;
 ```
 
 Run all four. DSO rises from about 40 days to 62 days; DIO rises from about 84 days to 122 days; DPO rises more modestly, from about 48 to 57 days. The company is collecting slower, holding inventory longer, and only partially offsetting that by stretching its own suppliers — the cash conversion cycle lengthens across the entire five years. Every one of those extra days is cash tied up in the operating cycle instead of sitting in the bank — which is the mechanical, line-by-line explanation for why the liquidity ratios in Section 2 are falling.
+
+```mermaid
+flowchart LR
+  A["DSO - days to collect"] --> D["Cash conversion cycle"]
+  B["DIO - days inventory held"] --> D
+  C["DPO - days to pay suppliers"] -->|subtracted| D
+```
+*How the three efficiency ratios combine into the cash conversion cycle.*
 
 ## 6. Reading trends, not points — the discipline
 

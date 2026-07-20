@@ -109,6 +109,17 @@ Carrying the same mechanic forward through Year 5:
 
 Notice the debt falls from **$100,000,000 to $52,366,179** — nearly cut in half — over five years, entirely funded by the business's own operations, with no additional capital from the sponsor. Each year's paydown accelerates slightly, because a shrinking debt balance means shrinking interest, which leaves more cash free for the *next* year's paydown — a self-reinforcing effect that is the entire financial engine of a leveraged buyout.
 
+```mermaid
+flowchart LR
+  A["Beginning debt"] --> B["Interest at 8%"]
+  B --> C["EBT then tax then net income"]
+  C --> D["Free cash flow"]
+  D --> E["Debt paydown 100% sweep"]
+  E --> F["Ending debt"]
+  F -->|"becomes next year's beginning debt"| A
+```
+*The cash-sweep cycle: falling debt lowers interest, which frees up more cash for the next year's paydown.*
+
 ## 6. Exit — realizing the return
 
 At the end of Year 5, the sponsor sells the business. `lbo_assumptions` specifies an **exit multiple equal to the entry multiple** (10.0x EBITDA) — the conservative base case, assuming no change in how the market values this kind of business over the hold period:

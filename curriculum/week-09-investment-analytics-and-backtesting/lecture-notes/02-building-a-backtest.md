@@ -65,6 +65,18 @@ This is the core of the backtest. The algorithm, stated precisely:
 4. Subtract the day's trading cost (if any) from the day's return.
 5. Compound daily returns into a cumulative equity curve.
 
+```mermaid
+flowchart TD
+  A["Rebalance date - new target weights from signal"] --> B["Turnover - versus yesterday's weights"]
+  B --> C["Trading cost from turnover"]
+  A --> D["Hold weights fixed until next rebalance"]
+  D --> E["Daily return - weighted sum of held returns"]
+  E --> F["Subtract day's cost"]
+  C --> F
+  F --> G["Compound into equity curve"]
+```
+*The five-step algorithm: weights come from the signal, turnover sets cost, and daily returns compound net of that cost.*
+
 ```python
 import pandas as pd
 import numpy as np

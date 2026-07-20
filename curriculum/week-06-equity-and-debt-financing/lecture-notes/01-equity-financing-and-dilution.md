@@ -74,6 +74,17 @@ SELECT
 
 Run that and you should land on **1,108,034 shares**, **\$21,052,646.00** gross, **\$1,052,632.30** in fees, and **\$20,000,013.70** net — thirteen dollars and change over target, purely from rounding up to a whole share. On a $20 million deal that's immaterial; it's worth seeing once so "shares must be whole numbers" stops being an afterthought and becomes something you check for, in every issuance you ever model.
 
+```mermaid
+flowchart LR
+  A["Net target 20,000,000"] --> B["Divide by 1 minus fee"]
+  B --> C["Gross proceeds"]
+  C --> D["Divide by offer price"]
+  D --> E["Shares exact"]
+  E --> F["Round up to whole share"]
+  F --> G["Shares issued 1,108,034"]
+```
+*The pricing pipeline that turns a net-cash target into a whole-share offering.*
+
 `CEIL()` (ceiling — round up to the next integer) exists in both PostgreSQL and SQLite; SQLite's version requires a build with the math functions extension enabled, which most modern builds include. If yours doesn't, compute it in Python instead: `math.ceil(shares_exact)`.
 
 ## 4. The new share count, and where the dilution comes from

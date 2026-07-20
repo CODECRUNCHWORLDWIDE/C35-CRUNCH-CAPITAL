@@ -79,6 +79,13 @@ Markets don't just price the transaction — they price **what the transaction r
 
 This is exactly why the **pecking order** most companies actually follow, in practice, is: fund projects with **internal cash** first if available, reach for **debt** second, and treat **equity** as a last resort reserved for when debt capacity is exhausted or a specific strategic reason (an acquisition, delevering, a genuine belief that the stock is overvalued) makes it the right call anyway. This isn't a rule this course asks you to accept on faith — Homework and the Challenges have you stress-test it against cases where the pecking order gets overridden for good reason.
 
+```mermaid
+flowchart LR
+  A["Internal cash"] --> B["Debt"]
+  B --> C["Equity as last resort"]
+```
+*The pecking order most companies follow when a project needs funding.*
+
 ## 7. Flexibility: fixed obligations versus discretionary ones
 
 The last axis is what happens in a **bad year**. If Crunch Machine Co.'s EBITDA falls sharply (Challenge 1 makes this concrete), the term loan's $4,943,294.36 payment is still due, in full, on schedule — that obligation does not flex with how the business is actually doing, and missing it can trigger covenant breach, technical default, and a scramble to renegotiate or refinance under pressure. A dividend, by contrast, can simply be **cut or skipped** in a bad year with no legal consequence beyond an unhappy shareholder base and a likely stock-price hit — painful, but survivable, and entirely within management's control. Debt's fixed obligation is precisely what makes it cheaper (lenders bear less uncertainty about getting paid, so they charge less for the privilege) and precisely what makes too much of it dangerous (Week 5's distress-cost curve). Equity's flexibility is precisely what makes it more expensive (shareholders bear the residual risk of everything else being paid first, so they demand more) and precisely what makes it safer to hold more of when the future is genuinely uncertain.
@@ -91,6 +98,15 @@ There is no single number that resolves "equity or debt" the way NPV resolves "a
 2. **Capacity** — does the company have room for more debt without breaching covenants or drifting into the distress-cost territory Week 5 warned about? Check the leverage and coverage math from Lecture 2 before assuming debt is available at all.
 3. **Control** — how much does existing ownership (especially founders, if control matters strategically) stand to lose, and does the company have room to give some up without consequence?
 4. **Flexibility and signaling** — how certain is the company that it can service a fixed obligation through a bad year, and what does the market likely infer from either choice?
+
+```mermaid
+flowchart TD
+  A["Cost"] --> E["Financing decision"]
+  B["Capacity"] --> E
+  C["Control"] --> E
+  D["Flexibility and signaling"] --> E
+```
+*The four axes a CFO weighs together before recommending equity or debt.*
 
 A CFO who can answer all four, with real numbers, is doing the job properly. A CFO who stops at "debt is cheaper" has only answered one of the four questions that actually matter.
 

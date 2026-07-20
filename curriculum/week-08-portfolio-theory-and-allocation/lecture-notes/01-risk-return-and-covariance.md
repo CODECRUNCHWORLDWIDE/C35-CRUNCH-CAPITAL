@@ -4,6 +4,14 @@
 
 Every other week of this course asked "is this thing good." This week asks a different question: "is this thing good *in combination with everything else I own*." That shift turns out to change the math completely, and the piece of math that changes it is **covariance** — how two assets' returns move together. Get comfortable with covariance this lecture and the rest of the week (frontier, tangency portfolio, CAPM) is just building on top of a matrix you already understand.
 
+```mermaid
+flowchart LR
+  A["Covariance Matrix - Lecture 1"] --> B["Efficient Frontier - Lecture 2"]
+  B --> C["Tangency Portfolio - Lecture 2"]
+  C --> D["CAPM and Factor Tilts - Lecture 3"]
+```
+*This week's arc: everything downstream builds on the covariance matrix from this lecture.*
+
 ## 1. Setting up the universe
 
 Confirm the seed loaded:
@@ -202,6 +210,18 @@ FROM paired p CROSS JOIN means m;
 ```
 
 You'll get a small negative number (monthly covariance) — multiply by 12 to annualize and it should land close to the `CRNQ`/`CRNB` cell of your pandas covariance matrix. **In practice, you'll do this kind of statistic in pandas** — the SQL version exists so you understand what `.cov()` is actually computing under the hood, not because you should build every covariance matrix by hand in SQL every time.
+
+```mermaid
+flowchart LR
+  A["Prices"] --> B["Returns"]
+  B --> C["Mean Return"]
+  B --> D["Variance"]
+  B --> E["Covariance"]
+  D --> F["Covariance Matrix"]
+  E --> F
+  F --> G["Portfolio Variance - w transpose Sigma w"]
+```
+*The full pipeline this lecture builds, from raw prices to portfolio-level risk.*
 
 ## 9. Check yourself
 

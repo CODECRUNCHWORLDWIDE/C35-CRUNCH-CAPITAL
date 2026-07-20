@@ -69,6 +69,19 @@ Accretion/(dilution) % = (Pro forma EPS − Standalone EPS) / Standalone EPS
 
 Even before a single dollar of synergy, the deal is **accretive by about 7.2%** — CRNM's own shareholders end next year with more earnings per share than if the deal never happened. This is not a coincidence; it follows directly from a pattern explained in Section 5.
 
+```mermaid
+flowchart TD
+  A["Combined EBIT 49.8M"] --> B["Combined interest 15.3M"]
+  B --> C["Combined EBT 34.5M"]
+  C --> D["Tax at 25%"]
+  D --> E["Combined net income 25.9M"]
+  E --> F["Pro forma EPS 0.9113"]
+  F --> G{"Pro forma EPS vs standalone EPS 0.85"}
+  G -->|"higher"| H["Accretive"]
+  G -->|"lower"| I["Dilutive"]
+```
+*How the pro forma income statement flows down to the accretion or dilution verdict.*
+
 ## 5. Why this deal is accretive before synergies — multiple arbitrage
 
 CRNM trades at a P/E of ~23.5x. SPSY, at the $19.50 offer price, has an implied P/E of only `19.50 / (11,100,000/10,000,000) = 19.50/1.11 ≈ 17.6x`. **CRNM is buying earnings at a lower multiple than the market pays for its own earnings.** This gap — buying "cheap" earnings with "expensive" currency — is the single most common reason a strategic stock-for-stock or cash deal turns out accretive, and it works through two separate channels:

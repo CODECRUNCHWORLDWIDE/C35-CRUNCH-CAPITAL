@@ -154,6 +154,17 @@ Run this combined shock through the same DCF machinery from Lecture 1 and see wh
 
 A complete risk section uses all three. Using only one — usually VaR, because it's the easiest to compute — is the single most common gap between a memo that looks rigorous and one that actually is.
 
+```mermaid
+flowchart TD
+  A["Risk process"] --> B["VaR: typical bad day"]
+  A --> C["Scenario analysis: named probability weighted futures"]
+  A --> D["Stress test: worst plausible combination"]
+  B --> E["Answers a frequency question"]
+  C --> F["Answers a named future question"]
+  D --> G["Answers a tail severity question"]
+```
+*Three risk tools, three different questions, none of them substitutes for the others.*
+
 ## 8. Check yourself
 
 - In one sentence, what does a 95% 1-day VaR of $23,200 actually promise you — and what does it explicitly NOT promise?

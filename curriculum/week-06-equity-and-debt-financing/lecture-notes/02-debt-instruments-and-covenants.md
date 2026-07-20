@@ -39,6 +39,15 @@ principal_this_year = payment − interest_this_year
 ending_balance       = beginning_balance − principal_this_year
 ```
 
+```mermaid
+flowchart LR
+  A["Beginning balance"] --> B["Interest equals balance times rate"]
+  B --> C["Principal equals payment minus interest"]
+  C --> D["Ending balance equals beginning minus principal"]
+  D -->|"Next period"| A
+```
+*Each year's ending balance becomes next year's beginning balance, until the loan hits zero.*
+
 Run it for all 5 years:
 
 | Period | Beginning balance | Payment | Interest paid | Principal paid | Ending balance |
@@ -99,6 +108,15 @@ Not all debt (or equity) sits at the same place in line if the company can't pay
 3. **Subordinated (junior) debt** — explicitly ranks behind senior debt; often carries a higher coupon to compensate lenders for that added risk.
 4. **Preferred equity** — ranks behind all debt, but ahead of common equity.
 5. **Common equity** — last in line. Common shareholders (everyone in this week's `shareholders` table) get paid only after every class of debt and preferred equity above them is made whole — which, in a real liquidation, is frequently nothing.
+
+```mermaid
+flowchart TD
+  A["Senior secured debt"] --> B["Senior unsecured debt"]
+  B --> C["Subordinated debt"]
+  C --> D["Preferred equity"]
+  D --> E["Common equity"]
+```
+*Seniority ranking from most protected to last paid in a liquidation.*
 
 This ordering is exactly why lenders can accept a lower return than equity investors demand for the same company: secured, senior debt is structurally far safer, and price follows risk. It's also why the term loan's collateral and seniority matter as much as its coupon rate when you're comparing "the cost of debt" to "the cost of equity" — they are not compensating for the same amount of risk.
 

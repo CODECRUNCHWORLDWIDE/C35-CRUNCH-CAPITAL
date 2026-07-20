@@ -19,6 +19,15 @@ This produces one of the cleanest results in all of finance, often called the **
 - **More conservative investor:** mostly risk-free asset, a small slice of the tangency portfolio — a point on the CML *below* the tangency portfolio, at lower volatility.
 - **More aggressive investor:** more than 100% in the tangency portfolio, financed by borrowing at (something close to) the risk-free rate — a point on the CML *above* the tangency portfolio, at higher volatility than the tangency portfolio itself.
 
+```mermaid
+flowchart LR
+  A["Risk-free Asset"] --> C["Capital Market Line"]
+  B["Tangency Portfolio"] --> C
+  C --> D["Conservative Investor - mostly risk-free below tangency"]
+  C --> E["Aggressive Investor - borrow to overweight tangency"]
+```
+*Fund separation: every investor holds just these two building blocks, only the split varies.*
+
 ```python
 import numpy as np
 
@@ -112,6 +121,15 @@ CAPM's central claim is that **only systematic risk (beta) is priced** — risk 
 You can decompose any asset's total variance into these two pieces:
 
 $$\sigma_i^2 = \underbrace{\beta_i^2 \, \sigma_m^2}_{\text{systematic}} + \underbrace{\sigma_{\epsilon,i}^2}_{\text{idiosyncratic}}$$
+
+```mermaid
+flowchart TD
+  A["Total Variance"] --> B["Systematic Variance - beta squared times market variance"]
+  A --> C["Idiosyncratic Variance - asset specific"]
+  B --> D["Priced by CAPM"]
+  C --> E["Diversified away for free"]
+```
+*CAPM only compensates investors for the systematic slice of an asset's risk.*
 
 ```python
 mkt_var_annual = returns["MKT"].var(ddof=1) * 12

@@ -161,6 +161,15 @@ Cash, end of year                        7,200
 
 **Financing activities (CFF)** cover money moving between the company and its capital providers — lenders and shareholders: debt issued or repaid, dividends paid, shares issued or bought back.
 
+```mermaid
+flowchart TD
+  A["Operating activities CFO"] --> D["Net change in cash"]
+  B["Investing activities CFI"] --> D
+  C["Financing activities CFF"] --> D
+  D --> E["Cash end equals cash begin plus net change"]
+```
+*How the three cash-flow-statement sections combine into the change in cash.*
+
 Sum the three sections and you get the **net change in cash** for the period — and beginning cash plus that change must equal ending cash, which (as you'll prove in Lecture 2 and Exercise 2) must also equal the cash figure reported on the balance sheet.
 
 Query it:
@@ -184,6 +193,13 @@ When you open a real company's filing, most analysts read in this order, not the
 1. **Income statement first** — get the headline: is revenue growing, and are margins expanding or shrinking?
 2. **Cash-flow statement second** — sanity-check the income statement against real cash. A company can report a profit and still be bleeding cash (rising AR, ballooning inventory) — that gap is often where trouble first shows up, well before it hits the income statement.
 3. **Balance sheet last** — see the accumulated state: how much debt has piled up, how much cash cushion is left, whether equity is growing or eroding.
+
+```mermaid
+flowchart LR
+  A["Income statement - is revenue growing"] --> B["Cash flow statement - does profit match cash"]
+  B --> C["Balance sheet - what state has accumulated"]
+```
+*The order most analysts actually read the three statements in practice.*
 
 That's also the order this week is built in: Lecture 1 (read all three), Lecture 2 (see how they connect), Lecture 3 (turn them into ratios that tell you, precisely, whether the trend is good or bad).
 

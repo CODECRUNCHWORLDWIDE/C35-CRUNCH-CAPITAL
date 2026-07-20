@@ -29,6 +29,17 @@ Enterprise Value
 = Value Per Share
 ```
 
+```mermaid
+flowchart TD
+    A["Enterprise value"] --> B["Minus total debt"]
+    B --> C["Minus preferred stock and minority interest"]
+    C --> D["Plus cash and equivalents"]
+    D --> E["Equity value"]
+    E --> F["Divide by diluted shares outstanding"]
+    F --> G["Value per share"]
+```
+*The EV-to-equity bridge, from enterprise value to per-share price.*
+
 The `Total Debt − Cash` piece is so common it gets its own name — **net debt** — and for a company like Crunch Machine Co. with no preferred stock, minority interest, or non-operating investments, the full bridge collapses to just:
 
 ```
@@ -99,6 +110,14 @@ Writing the bridge once and calling it for every method (rather than re-deriving
 2. **Look for convergence.** Lay every method's range on one number line (a **football field** chart — Challenge 1 builds this) and find where multiple *independent* methods' ranges overlap. Overlap between methods that used different evidence (a DCF assumption and a market multiple, say) is much stronger evidence than agreement between two flavors of the same method.
 3. **Weight by how much you trust the evidence, not by how many methods you ran.** If the comp set is thin or the peers are only loosely comparable, a well-built DCF might deserve more weight even if it's the "odd one out" numerically. If the DCF rests on aggressive, hard-to-defend margin assumptions, the market-grounded comps deserve more weight instead. This is a judgment call — state it explicitly, don't hide it inside an unweighted average.
 4. **Report a range, not a false-precision point number**, unless you're specifically required to name one price (e.g., setting an offer price in a negotiation). "$15.50–$18.00 per share, with a base case around $16.75–$17.00" is more honest, and more useful to a decision-maker, than a single number implying two decimal places of confidence a valuation exercise this uncertain can't actually support.
+
+```mermaid
+flowchart TD
+    A["Rule out broken assumptions"] --> B["Look for convergence across methods"]
+    B --> C["Weight by confidence in the evidence"]
+    C --> D["Report a range with a base case"]
+```
+*The four-step process for reconciling multiple valuation estimates into one range.*
 
 Applying that process to this week's numbers: the **overlap zone** where DCF (exit-multiple, $16.10), the top of trading comps ($15.53), and precedent transactions ($14.81–$17.20) all sit is roughly **$15.50–$17.20**. The DCF perpetuity-growth result ($18.70) sits above that zone — worth flagging as the optimistic case, not discarding — and the low end of trading comps ($11.96, driven by the lowest-multiple peer) sits below it as the pessimistic case. A recommended range of **$15.50–$18.00, with a base case near $16.75**, is a genuinely defensible answer: it's grounded in where independent methods agree, it doesn't hide the wide DCF-vs-comps disagreement, and it gives a decision-maker something concrete to act on. The mini-project has you build this exact analysis and defend your own version of it.
 

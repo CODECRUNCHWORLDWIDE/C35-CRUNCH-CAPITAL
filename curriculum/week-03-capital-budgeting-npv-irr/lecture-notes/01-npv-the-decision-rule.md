@@ -26,6 +26,16 @@ For **mutually exclusive** projects (you can only pick one of several competing 
 
 For **independent** projects (accepting one doesn't preclude accepting another — most of a company's project list, if capital is unlimited), the rule is simpler still: **accept every project with NPV > 0.** Each one adds value on its own; there's no competition between them unless a budget constraint forces you to choose (that's Lecture 3).
 
+```mermaid
+flowchart TD
+    A["Project under evaluation"] --> B{"Independent or mutually exclusive"}
+    B -->|"Independent"| C["Accept every project with NPV above zero"]
+    B -->|"Mutually exclusive"| D["Compare NPV across the competing options"]
+    D --> E["Pick the option with the higher NPV"]
+    E --> F["Confirm it still clears zero before funding"]
+```
+*Decision path from a project's independence status to the accept or reject call.*
+
 ## 3. Worked example — the New CNC Machine
 
 You built this exact number in Week 1 by hand. Recall the stream (project 1 in this week's `cash_flows` table, hurdle rate 7%):

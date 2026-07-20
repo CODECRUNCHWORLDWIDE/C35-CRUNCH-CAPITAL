@@ -10,6 +10,15 @@ Interest expense is (mostly) a **fixed cost** — a company that borrowed a fixe
 
 **Simple illustration.** A firm with `EBIT = 1,000` and `interest = 400` has `pretax income = 600`. If EBIT falls 10% to `900`, pretax income falls to `500` — a swing of `100` on a base of `600`, or **16.7%**, not 10%. The interest payment absorbed none of the shock; net income absorbed all of it, on a smaller starting base. That gap between the percentage change in EBIT and the (larger) percentage change in what's left for equity is exactly what leverage amplification measures.
 
+```mermaid
+flowchart LR
+  A["EBIT changes by some percent"] --> B["Interest stays fixed"]
+  B --> C["Pretax income absorbs the full dollar change"]
+  C --> D["Pretax income changes by a larger percent"]
+  D --> E["Net income and EPS change by that same larger percent"]
+```
+*A fixed interest payment forces the whole dollar swing in EBIT onto a smaller base, producing a bigger percentage swing downstream.*
+
 ## 2. Degree of Financial Leverage (DFL)
 
 $$DFL = \frac{\% \Delta \text{ net income (or EPS)}}{\% \Delta \text{ EBIT}} = \frac{EBIT}{EBIT - \text{interest}} = \frac{EBIT}{\text{pretax income}}$$
@@ -112,6 +121,14 @@ $$DOL = \frac{\% \Delta \text{ EBIT}}{\% \Delta \text{ revenue}}$$
 A company with a lot of fixed operating cost relative to variable cost (a factory with expensive machinery and a small variable-labor component, say) has high DOL — a small revenue swing produces a large EBIT swing, *before* interest even enters the picture. Multiply the two amplifiers together and you get the **Degree of Combined Leverage (DCL)**:
 
 $$DCL = DOL \times DFL = \frac{\% \Delta \text{ net income}}{\% \Delta \text{ revenue}}$$
+
+```mermaid
+flowchart LR
+  A["Revenue changes"] --> B["DOL amplifies the change into EBIT"]
+  B --> C["DFL amplifies EBIT into net income"]
+  C --> D["Combined swing equals DOL times DFL"]
+```
+*Two amplifiers stacked in series - operating leverage first, then financial leverage.*
 
 This week's course stays focused on DFL — the financing-side lever, which is what a capital-structure decision directly controls — but DCL is worth keeping in the back of your mind: a company with **both** high operating leverage and high financial leverage is the most fragile kind of business, because a modest revenue miss gets amplified twice before it reaches net income. A capital-intensive manufacturer like Crunch Machine Co. — heavy fixed costs from `ppe_net` and depreciation, on top of the rising interest burden this lecture has focused on — plausibly carries meaningful DOL too, which would make its true combined fragility worse than the DFL-only view in Section 5 shows on its own. Quantifying DOL properly requires splitting costs into fixed and variable components, which needs cost data this week's `income_statement` table doesn't break out — a natural next step if you ever model this company's operations, not something this week's seed data supports directly.
 

@@ -128,6 +128,15 @@ $$
 \beta_L^{\text{target}} = \beta_U \times \left(1 + (1-t)\left(\dfrac{D}{E}\right)_{\text{target}}\right)
 $$
 
+```mermaid
+flowchart LR
+  A["Levered beta of peer company"] --> B["Remove peer capital structure"]
+  B --> C["Unlevered beta - asset risk only"]
+  C --> D["Apply target capital structure"]
+  D --> E["Relevered beta at target company"]
+```
+*Stripping financing out of a peer's beta, then reapplying it at the target company's own leverage.*
+
 ### 3.1 Worked example: unlever, then relever
 
 Suppose a close peer of Crunch Machine Co. — call it **Steelcrest Automation** — has a levered beta of 1.60, carries $D/E = 0.90$, and faces a 25% tax rate. Its business is comparable to Crunch Machine Co.'s, but it's financed far more aggressively. Unlever it:

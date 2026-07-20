@@ -25,6 +25,16 @@ $$
 
 where $C$ is the annual coupon payment (per $100 of face value), $F$ is the face value ($100 by convention), $P$ is the current market price (per $100 of face value), and $n$ is the number of years to maturity. Read the numerator as "the coupon, plus the annualized capital gain or loss from now to maturity"; the denominator as "the average of what you paid and what you'll get back" — together, roughly, your average annual return relative to your average capital at risk.
 
+```mermaid
+flowchart LR
+  A["Bond price and coupon"] --> B["Approximate YTM per tranche"]
+  B --> C["Weight by market value"]
+  C --> D["Blended pretax cost of debt"]
+  D --> E["Apply tax shield"]
+  E --> F["After-tax cost of debt"]
+```
+*The pipeline from raw bond data to the after-tax cost of debt that feeds WACC.*
+
 ### 2.1 Applying it to Crunch Machine Co.'s three tranches
 
 Crunch Machine Co. has three bonds outstanding, all in `debt_tranches`:
@@ -161,6 +171,17 @@ WACC = \frac{E}{V} \times R_e + \frac{D}{V} \times R_d \times (1 - t)
 $$
 
 Using the **regression-derived beta from Lecture 2** ($\beta = 1.24$) rather than the vendor beta, because it's the one you can fully audit:
+
+```mermaid
+flowchart LR
+  Re["Cost of equity"] --> WE["Weighted equity cost"]
+  EV["Equity weight E over V"] --> WE
+  Rd["After-tax cost of debt"] --> WD["Weighted debt cost"]
+  DV["Debt weight D over V"] --> WD
+  WE --> WACC["WACC"]
+  WD --> WACC
+```
+*How equity's and debt's weighted costs sum to the company's WACC.*
 
 ```python
 rf = cs["risk_free_rate"]

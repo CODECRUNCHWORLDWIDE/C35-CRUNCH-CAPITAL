@@ -19,6 +19,15 @@ $$
 
 So CAPM says: *start with what you'd earn risk-free, then add a risk premium scaled by how much market risk this specific stock carries.* A stock that moves exactly with the market ($\beta = 1$) earns the market's risk premium exactly. A stock that amplifies market moves ($\beta > 1$) earns more; a stock that dampens them ($\beta < 1$) earns less; and — in the theoretical limit — a stock with $\beta = 0$ earns exactly the risk-free rate, no risk premium at all, because CAPM claims the market doesn't reward risk it can diversify away (more on this below).
 
+```mermaid
+flowchart LR
+  Rf["Risk free rate"] --> Re["Cost of equity"]
+  Beta["Beta"] --> Premium["Beta times equity risk premium"]
+  ERP["Equity risk premium"] --> Premium
+  Premium --> Re
+```
+*CAPM's three inputs — risk-free rate, beta, and equity risk premium — combine into the cost of equity.*
+
 ## 2. Where each input comes from
 
 ### 2.1 The risk-free rate ($R_f$)

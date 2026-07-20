@@ -24,6 +24,17 @@ The much larger, harder-to-see costs that show up *before* any formal filing, of
 - **Underinvestment.** Distressed firms cut R&D, maintenance capex, and promising-but-risky projects, even ones with positive NPV, because equity holders (who bear the marginal risk in this cash-strapped range) and creditors (who'd rather see any spare cash used to repay them) don't agree on how to spend scarce cash. This specific breakdown has a name — the **underinvestment problem**, one of several "agency costs of debt" that compound distress costs beyond the direct legal bill.
 - **Fire-sale asset losses.** A company forced to sell assets quickly, under pressure, to raise cash typically gets far less than the asset's true value in an orderly sale.
 
+```mermaid
+flowchart TD
+  A["Financial distress costs"] --> B["Direct costs such as legal and court fees"]
+  A --> C["Indirect costs"]
+  C --> D["Lost customers and suppliers"]
+  C --> E["Talent flight"]
+  C --> F["Underinvestment"]
+  C --> G["Fire-sale asset losses"]
+```
+*Direct costs are the visible legal bill; indirect costs are the larger, harder-to-see damage that starts before any filing.*
+
 Empirical estimates of total distress costs (direct + indirect combined) vary widely by industry — capital-light service or brand-dependent businesses (where customer trust *is* the asset) tend to see costs on the higher end, sometimes estimated at **15%–30%+ of firm value**; asset-heavy manufacturers with resaleable equipment tend to see somewhat lower indirect costs, because their physical assets retain value even in a fire sale. This week uses **30% of unlevered firm value** as Crunch Machine Co.'s stylized total distress-cost estimate — high enough to reflect that a mid-size industrial manufacturer's value depends partly on ongoing customer relationships and skilled staff, not just resaleable machines.
 
 ## 2. Reading distress risk before it happens: interest coverage
@@ -68,6 +79,15 @@ Where `α` is the fraction of unlevered value destroyed *if* distress fully occu
 $$V_L(D) = V_U + T_c D - \frac{\alpha}{V_U} D^2$$
 
 This is a downward-opening parabola in `D` (the `D²` term has a negative coefficient) — which means it has a single interior maximum. Debt creates value at the margin while the tax shield's marginal benefit exceeds the marginal expected distress cost; past that point, more debt actively **destroys** value, because the convex distress-cost term is growing faster than the linear tax-shield term.
+
+```mermaid
+flowchart LR
+  A["Unlevered value VU"] --> B["Add the tax shield Tc times D"]
+  B --> C["Subtract the expected distress cost"]
+  C --> D["Levered value VL of D"]
+  D --> E["Value peaks at D star then declines"]
+```
+*The tradeoff model as a pipeline - value climbs while the shield dominates, then falls once expected distress cost takes over.*
 
 ## 5. Solving for the value-maximizing debt level
 

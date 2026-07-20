@@ -85,6 +85,16 @@ PV(stream) = Σ CFₜ / (1 + r)^t     for t = 0, 1, 2, ..., n
 
 Note `t = 0` is *today* — and `(1 + r)^0 = 1`, so a period-0 cash flow is never discounted; it's already in today's dollars. This matters because most capital projects start with a negative cash flow at period 0 (the initial investment), and that number needs **no discounting at all**.
 
+```mermaid
+flowchart LR
+  A["Period 0 cash flow"] --> S["Sum all discounted flows"]
+  B["Period 1 cash flow discounted"] --> S
+  C["Period 2 cash flow discounted"] --> S
+  D["Period N cash flow discounted"] --> S
+  S --> N["Net present value"]
+```
+*Each period's cash flow is discounted on its own, then summed into one NPV.*
+
 **Worked example** — the full New CNC Machine stream at its 7% hurdle rate:
 
 | Period | Cash flow | Discount factor | PV of this flow |

@@ -13,6 +13,17 @@ A SAFE is not a loan (no interest, no maturity date, no promise of repayment) an
 
 A SAFE can have a cap only, a discount only, both, or (rarely) neither. When a SAFE has both, it converts at **whichever price is lower for the investor** — i.e., whichever gives them **more shares** for their money. That "greater of the two deals" rule is the single most important mechanical fact about SAFEs.
 
+```mermaid
+flowchart TD
+  A["SAFE has a cap and a discount"] --> B["Priced round happens"]
+  B --> C["Compute the cap price"]
+  B --> D["Compute the discount price"]
+  C --> E{"Which price is lower"}
+  D --> E
+  E --> F["SAFE converts at that lower price"]
+```
+*The SAFE always converts at whichever of the two formulas is better for the investor.*
+
 **Solstice's seed round** (mid-2023) raises three SAFEs:
 
 ```sql
@@ -89,6 +100,15 @@ Two definitions do all the work in a priced round:
 Meridian's term sheet includes a standard clause: Solstice must create (or top up) an **option pool** — unallocated shares reserved for future hires — equal to **20% of the fully diluted cap table, measured *after* the pool is created but *before* the new investor's shares are issued.** This sounds like a footnote. It is not. It's the single most consequential clause in most term sheets, and here's why: the pool is created **pre-money**, meaning **only existing shareholders (founders, advisors, converted SAFEs) absorb its dilution — Meridian's percentage is unaffected by it.**
 
 Work the algebra once, carefully, because you'll run it every time a term sheet mentions a pool.
+
+```mermaid
+flowchart LR
+  A["Existing fully diluted shares"] --> B["Solve for the pool top-up"]
+  B --> C["Price the round"]
+  C --> D["Issue the new investor shares"]
+  D --> E["Convert the discount-only SAFE"]
+```
+*The five-step order a priced round with an investor-mandated pool actually resolves in.*
 
 **Step 1 — existing fully diluted shares before any pool top-up**, including the SAFEs that convert at their locked cap price:
 

@@ -17,6 +17,15 @@ Enterprise Value (EV)  = Market Capitalization + Total Debt − Cash & Equivalen
 
 Read the EV formula in plain English: **EV is what it would cost to buy the entire business outright** — you'd have to buy every share (market cap) *and* pay off or assume all of its debt, but you'd immediately get the cash on its balance sheet back, which nets against the price. That's exactly the same "whole business, before any financing structure" concept the DCF's enterprise value represents in Lecture 1 — which is precisely why the two are comparable to each other at all.
 
+```mermaid
+flowchart LR
+    A["Share price times shares outstanding"] --> B["Market capitalization"]
+    B --> C["Plus total debt"]
+    C --> D["Minus cash and equivalents"]
+    D --> E["Enterprise value"]
+```
+*How enterprise value is built from market cap, debt, and cash.*
+
 ## 2. Selecting a comp set — the criteria that matter
 
 A comp set is only as good as its selection discipline. A defensible trading-comps set is chosen on:
@@ -25,6 +34,15 @@ A comp set is only as good as its selection discipline. A defensible trading-com
 - **Size.** Similar revenue and EBITDA scale. A $2B revenue conglomerate and a $200M niche manufacturer rarely trade at comparable multiples, even in the same industry — scale changes growth expectations, financing access, and buyer pools.
 - **Growth and margin profile.** Comps growing at wildly different rates, or with structurally different margins, will carry different multiples for good reason — a 6%-growth, 20%-margin business and a 25%-growth, 35%-margin business are not really "comparable" just because both make industrial equipment.
 - **Capital intensity and business model.** A company that leases its equipment out versus one that sells it outright has a fundamentally different cash-conversion profile, even selling the same physical product.
+
+```mermaid
+flowchart TD
+    A["Comp set selection criteria"] --> B["Industry and end market"]
+    A --> C["Size - revenue and EBITDA scale"]
+    A --> D["Growth and margin profile"]
+    A --> E["Capital intensity and business model"]
+```
+*The four criteria a defensible comp set must satisfy.*
 
 This week's `trading_comps` table has already been screened to six companies that plausibly clear these bars against Crunch Machine Co. — similar industrial-equipment end markets, revenue in the $165M–$410M range (CRNM's LTM revenue is $210M), and EBITDA margins clustered in the high-teens to low-20s%. Real comp selection is a judgment call an analyst defends in a footnote; this week, treat the six as pre-screened and focus on the mechanics of what to do with them (Challenge 2 asks you to argue whether any of the six actually belong).
 

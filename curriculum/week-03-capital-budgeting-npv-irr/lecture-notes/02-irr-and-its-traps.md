@@ -137,6 +137,17 @@ Notice **MIRR (14.42%) is lower than IRR (20.17%)** for the same project, using 
 
 Because it's genuinely useful for two things NPV doesn't do well: it's **scale-free** (easy to compare against a hurdle rate or another firm's cost of capital without knowing project size), and it's **intuitive to non-finance stakeholders** ("20% return" lands better in a room than "$71,713 of NPV"). The right posture, and the one this course teaches: **compute both. Use IRR/MIRR as a communication and sanity-check tool. Let NPV make the actual accept/reject and ranking decision, every time, without exception, especially whenever projects differ in scale, differ in cash-flow timing, or have more than one sign change.**
 
+```mermaid
+flowchart TD
+    A["Cash flow stream"] --> B{"More than one sign change"}
+    B -->|"Yes"| C["Do not trust a single IRR value"]
+    B -->|"No"| D["Compute IRR as a sanity check"]
+    C --> E["Use NPV directly to decide"]
+    D --> E
+    E --> F["NPV makes the accept or reject call"]
+```
+*Why IRR is a communication tool while NPV always makes the final call.*
+
 ## 8. Common mistakes
 
 - **Ranking mutually exclusive projects of different sizes by IRR.** Trap #1. Rank by NPV, or — under a hard budget constraint — by profitability index (Lecture 3).

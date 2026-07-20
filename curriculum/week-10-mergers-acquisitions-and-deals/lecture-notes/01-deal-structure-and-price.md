@@ -64,6 +64,14 @@ Implied enterprise value = Equity purchase price + Target net debt
 
 CRNM is implicitly paying **$207,000,000** for SPSY's whole operating business — $12M more than the headline $195M equity check, because it's also absorbing SPSY's net debt.
 
+```mermaid
+flowchart LR
+  A["Unaffected price $15.00"] -->|"plus 30% control premium"| B["Offer price $19.50"]
+  B -->|"times 10M shares outstanding"| C["Equity purchase price $195M"]
+  C -->|"plus target net debt $12M"| D["Implied enterprise value $207M"]
+```
+*The price bridge from the unaffected market price to the implied enterprise value.*
+
 ## 5. Implied multiples — sanity-checking the price against Week 7's tools
 
 An implied enterprise value only means something in context. Convert it to multiples of SPSY's own financials, exactly like Week 7's trading comps:

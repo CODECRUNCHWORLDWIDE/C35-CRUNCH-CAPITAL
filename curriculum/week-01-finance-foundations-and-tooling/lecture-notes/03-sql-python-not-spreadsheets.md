@@ -128,6 +128,14 @@ From this week forward, the pattern repeats:
 3. **SQL does the heavy filtering/aggregation**; pandas does the heavier numerical modeling (optimization, simulation, statistics) that's awkward or impossible in pure SQL.
 4. **Results, where useful, get written back to SQL** — so they're queryable too, not stranded in a notebook only you can open.
 
+```mermaid
+flowchart LR
+  A["PostgreSQL tables"] --> B["pandas DataFrame"]
+  B --> C["Python modeling logic"]
+  C --> D["Results written back to SQL"]
+```
+*The store, model, persist pipeline used every week of this course.*
+
 You already have both halves of this running: the `cash_flows` table from the week README, and the Python environment from section 3. Exercise 3 has you build the first real pandas layer on top of it.
 
 ## 8. Check yourself

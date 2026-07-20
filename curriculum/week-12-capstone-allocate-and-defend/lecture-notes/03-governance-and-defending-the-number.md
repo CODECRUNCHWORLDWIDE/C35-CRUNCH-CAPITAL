@@ -18,6 +18,15 @@ ORDER BY industry;
 
 Notice the shape of every failure mode in that table: in each case, **someone was rewarded for optimizing a number that was a proxy for value creation, and they optimized the proxy instead of the value.** Revenue-only bonuses got channel-stuffed. Price-only vesting got maintenance capex deferred. That pattern — reward the proxy, get the proxy, not the goal — is the single most useful governance heuristic you'll carry out of this course. Every time you evaluate an incentive plan, ask: *what would a rational, self-interested manager do to maximize this specific metric, even if it hurt the business?* If the honest answer is "something bad," you've found a governance risk before it shows up in the financials.
 
+```mermaid
+flowchart LR
+  A["Bonus tied to one proxy metric"] --> B["Manager optimizes the proxy"]
+  B --> C["Proxy metric hits target"]
+  B --> D["Underlying value creation lags"]
+  C --> E["Bonus pays out anyway"]
+```
+*The recurring governance failure pattern: the metric gets optimized, not the goal it was meant to stand in for.*
+
 ## 2. Quantifying an incentive, not just describing it
 
 Description is a start; **quantification is the standard this course holds you to.** Take Case 1 from `capstone_governance_cases` — a bonus plan paid on revenue growth alone — and model it against your own `capstone_scenarios` to see exactly how it would have behaved.
@@ -97,6 +106,14 @@ Structure every claim in your memo the same way:
 1. **The claim** — one sentence, in plain English ("Our blended valuation is $15.29/share, 22% above the current market price of $12.50").
 2. **The method** — one or two sentences on how you got there (DCF perpetuity + exit multiple, weighted 60% against comps at 40%).
 3. **The reproducible artifact** — the actual query or script filename, so a skeptical reader can run it themselves.
+
+```mermaid
+flowchart LR
+  A["The claim in plain English"] --> B["The method DCF or comps or script"]
+  B --> C["The reproducible artifact query or script"]
+  C --> D["IC member re-runs it live"]
+```
+*Every number in the memo carries its own receipt, from claim to method to a re-runnable artifact.*
 
 This is exactly what separates the mini-project's deliverable from a normal essay. It's also the only real defense against your own confirmation bias: if you can't write the query that proves a claim, that's usually a sign the claim is softer than you think it is — a useful, humbling check to run on yourself *before* an IC member runs it on you.
 

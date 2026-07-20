@@ -105,6 +105,17 @@ def pv_finite_tax_shield(schedule: pd.DataFrame, tax_rate: float, discount_rate:
     return float((shields * discount_factors).sum())
 ```
 
+```mermaid
+flowchart TD
+  A["Firm pays interest equal to rD times D"] --> B["Taxable income falls by rD times D"]
+  B --> C["Tax bill falls by Tc times rD times D"]
+  C --> D["Annual interest tax shield"]
+  D --> E{"Is the debt permanent"}
+  E -->|"Yes"| F["Discount as a perpetuity - PV equals Tc times D"]
+  E -->|"No"| G["Sum each period's shield discounted at rD"]
+```
+*From an interest payment to the two ways of pricing its tax shield, depending on whether the debt is permanent or has a finite maturity.*
+
 The finite-life sum will always be **smaller** than `Tc × D`, because a loan that eventually gets paid off stops generating a tax shield — `Tc × D` implicitly assumes the shield never ends.
 
 ## 7. Crunch Machine Co. — pricing the shield, 2021 vs. 2025

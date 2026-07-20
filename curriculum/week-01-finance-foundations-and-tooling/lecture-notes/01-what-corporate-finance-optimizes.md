@@ -46,6 +46,14 @@ Here's the mental model this course keeps coming back to. When you face a financ
 3. **What is the present value of the stream, net of what you have to pay?** This is the number that actually tells you whether the decision creates value. A project that "sounds exciting" but has negative net present value destroys value, full stop — no amount of enthusiasm changes the arithmetic.
 4. **What could go wrong, and can you survive it?** Even a positive-NPV decision can bankrupt you if it requires more cash than you have when you need it, or if the downside scenario is worse than your base case assumed. This is where risk becomes not just "a number in the discount rate" but a question of solvency and survival.
 
+```mermaid
+flowchart TD
+  A["List the cash flows"] --> B["Pick the discount rate"]
+  B --> C["Compute present value"]
+  C --> D["Stress test what could go wrong"]
+```
+*The four-step operator checklist applied to any financial decision.*
+
 You'll formalize steps 2–3 starting next lecture and build the full toolkit for step 1 and step 4 across the rest of this course (statements in Week 2, capital budgeting in Week 3, cost of capital in Week 4, capital structure and distress in Week 5).
 
 ## 4. A worked example, in plain English

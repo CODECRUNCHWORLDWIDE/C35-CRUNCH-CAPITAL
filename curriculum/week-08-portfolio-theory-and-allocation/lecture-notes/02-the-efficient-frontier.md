@@ -18,6 +18,15 @@ $$\mu_p = w^T \mu \qquad \qquad \sigma_p^2 = w^T \Sigma \, w$$
 
 Before the formulas, the one idea worth internalizing: **every portfolio on the efficient frontier is a linear combination of just two "special" portfolios.** This is called the **two-fund separation theorem**. Practically, it means once you've found *any two* distinct portfolios on the frontier, every other frontier portfolio is some weighted blend of those two. The two special portfolios this lecture solves for explicitly are the **global minimum-variance (GMV) portfolio** (the single lowest-risk point on the entire frontier) and the **maximum-Sharpe (tangency) portfolio** (the portfolio with the best risk-adjusted return, which you'll define precisely in Section 5). Once you have those two, you effectively have the whole frontier.
 
+```mermaid
+flowchart TD
+  A["Covariance Matrix and Expected Returns"] --> B["Global Minimum Variance Portfolio"]
+  A --> C["Maximum Sharpe Tangency Portfolio"]
+  B --> D["Any Efficient Frontier Portfolio - weighted blend"]
+  C --> D
+```
+*Two-fund separation: solve for GMV and tangency once, then blend them to get every other frontier point.*
+
 ## 3. Setting up the inputs
 
 Load the covariance matrix and expected returns exactly as in Lecture 1:
@@ -152,6 +161,15 @@ for t, v in frontier:
 Run it and you'll see the frontier trace out a **hyperbola** shape: volatility starts around 5.7% near the low-return end, dips to a minimum around **4.0%** near a 5–6% target return (that's the GMV portfolio you already found — the frontier's vertex), and then rises again as the target return climbs past that point. That vertex is *exactly* the GMV portfolio: it's the single point on the frontier where volatility is minimized, full stop — every other point trades additional risk for additional expected return.
 
 **One critical fact about this shape**: the frontier is really the *right branch* of that hyperbola. The left branch (below the GMV point) is mathematically valid but never worth holding — for any given volatility, there's always a higher-return portfolio available on the right branch at that *same* volatility level. Portfolios on the left branch are called "inefficient" for exactly this reason, and it's why the curve is called the **efficient** frontier — only the upper-left-to-upper-right sweep past the GMV vertex actually belongs on it.
+
+```mermaid
+flowchart LR
+  A["GMV Vertex - minimum volatility"] --> B["Right Branch - Efficient"]
+  A --> C["Left Branch - Inefficient"]
+  B --> D["Higher return at same vol - worth holding"]
+  C --> E["Lower return at same vol - dominated"]
+```
+*The GMV point splits the hyperbola: only the right branch is ever worth holding.*
 
 ## 7. Where risk tolerance comes back in
 

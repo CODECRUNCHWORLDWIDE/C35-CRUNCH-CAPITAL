@@ -24,6 +24,15 @@ This join has no date condition on `f.as_of_date` at all — it attaches the `20
 
 The honest fix, in a codebase with only one snapshot date, is to restrict any backtest using the value factor to dates on or after the snapshot's `as_of_date` — which, uncomfortably, leaves you almost nothing to test on this week, and is exactly the point: **a signal you can't honestly test is not a signal you can honestly trade.** A production system solves this properly with a full **point-in-time fundamentals table** — one row per `(ticker, filing_date, ...)` for every historical earnings release — and joins on `filing_date <= price_date` (picking the most recent filing as of each price date), never on ticker alone.
 
+```mermaid
+flowchart TD
+  A["For each price date d"] --> B["Look at all fundamental snapshots for that ticker"]
+  B --> C["Keep only snapshots on or before date d"]
+  C --> D["Pick the most recent one of those"]
+  D --> E["Join that snapshot to date d"]
+```
+*The point-in-time-correct join: only fundamentals that existed as of the price date are allowed to inform it.*
+
 ```sql
 -- The point-in-time-correct shape of a fundamentals join, for when
 -- you have more than one snapshot date (a real production dataset would):
@@ -75,6 +84,16 @@ With this week's dataset — 2024–2025 — a natural split is **train on 2024,
 ## 4. Walk-forward validation — rolling the split through time
 
 A single train/test split gives you one out-of-sample verdict from one particular market regime (2025, in our case, might happen to be a smooth uptrend or a choppy year — either way, it's one sample). **Walk-forward validation** rolls the split through time repeatedly: train on window 1, test on window 2; then slide forward — train on windows 1–2, test on window 3; and so on — producing *several* independent out-of-sample verdicts instead of one.
+
+```mermaid
+flowchart LR
+  T1["Window 1 train"] --> S1["Window 1 test"]
+  S1 --> T2["Window 2 train - slides forward"]
+  T2 --> S2["Window 2 test"]
+  S2 --> T3["Window 3 train - slides forward"]
+  T3 --> S3["Window 3 test"]
+```
+*Walk-forward validation rolls the train and test windows through time, producing several independent out-of-sample verdicts instead of one.*
 
 ```python
 import pandas as pd

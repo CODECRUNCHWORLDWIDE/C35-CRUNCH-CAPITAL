@@ -11,6 +11,15 @@ There are two articulation checks you'll run constantly, this week and for the r
 1. **Net income → retained earnings.** The income statement's bottom line has to explain the change in the balance sheet's retained-earnings line.
 2. **Cash-flow statement → balance sheet.** The cash-flow statement's ending cash has to equal the balance sheet's cash.
 
+```mermaid
+flowchart LR
+  IS["Income statement net income"] --> RE["Balance sheet retained earnings"]
+  CF["Cash flow statement ending cash"] --> BC["Balance sheet cash"]
+  RE -.-> T["Statements articulate"]
+  BC -.-> T
+```
+*The two articulation checks that must tie the three statements together.*
+
 ## 2. Check 1 — net income flows into retained earnings
 
 Retained earnings is the balance sheet's memory of every dollar of profit the company has ever kept. Each year, exactly one equation governs how it changes:
@@ -111,6 +120,15 @@ ORDER BY b.fiscal_year;
 ```
 
 Notice the sign flip: when AR *increases* year over year (`ar_change` is positive), the cash-flow line is *negative* — an increase in a customer's unpaid balance is a use of cash, because it's revenue you booked but haven't collected. When AP *increases* (positive `ap_change`), the cash-flow line is also *positive* — an increase in what you owe suppliers is a source of cash, because you're holding onto your own cash longer before paying it out. Inventory behaves like AR (an asset — increase is a cash use); AP behaves oppositely (a liability — increase is a cash source). This asset-vs-liability sign flip is the single most common place beginners get the cash-flow statement backwards. Say it out loud until it's automatic: **assets up, cash down; liabilities up, cash up.**
+
+```mermaid
+flowchart TD
+  A["Asset increases"] --> B["Cash decreases"]
+  C["Asset decreases"] --> D["Cash increases"]
+  E["Liability increases"] --> F["Cash increases"]
+  G["Liability decreases"] --> H["Cash decreases"]
+```
+*The asset-versus-liability sign-flip rule for cash-flow adjustments.*
 
 ## 5. Why the model must tie out — the practical case
 
